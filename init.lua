@@ -1,5 +1,5 @@
 local global = vim.g
-local o = vim.o
+local o = vim.opt
 
 vim.scriptencoding = "utf-8"
 
@@ -16,6 +16,7 @@ o.autoindent = true         -- Copy indent from current line when starting a new
 o.cursorline = true         -- Highlight the screen line of the cursor with CursorLine.
 o.expandtab = true          -- Use spaces instead of tabs
 o.shiftwidth = 2            -- Number of spaces to use for each step of (auto)indent.
+o.softtabstop = 2
 o.tabstop = 2               -- Number of spaces that a <Tab> in the file counts for.
 o.encoding = "utf-8"        -- Character encoding used inside Vim.
 o.fileencoding = "utf-8"    -- Character encoding for the file of this buffer.
@@ -30,7 +31,6 @@ o.showmatch = true          -- Briefly jump to the matching bracket
 o.inccommand = "split"      -- Show effects of substitute commands as you type
 o.splitbelow = true         -- New horizontal splits appear below the current window
 o.splitright = true         -- New vertical splits appear to the right of the current window
-o.softtabstop = 2
 
 require("config.lazy")
 
