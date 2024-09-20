@@ -35,7 +35,6 @@ return {
       lspconfig.emmet_language_server.setup({ capabilities = capabilities })
       lspconfig.rnix.setup({ capabilities = capabilities })
       lspconfig.volar.setup({ capabilities = capabilities })
-      lspconfig.vuels.setup({ capabilities = capabilities })
 
       lspconfig.ts_ls.setup({
         capabilities = capabilities,
