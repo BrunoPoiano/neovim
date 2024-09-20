@@ -36,6 +36,22 @@ return {
       lspconfig.rnix.setup({ capabilities = capabilities })
       lspconfig.volar.setup({ capabilities = capabilities })
 
+      -- golang
+      lspconfig.gopls.setup({
+        capabilities = capabilities,
+        on_attach = function(_, bufnr)
+          -- You can customize any specific settings for gopls here
+          vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+            vim.lsp.diagnostic.on_publish_diagnostics, {
+              underline = true,
+              virtual_text = false,
+              update_in_insert = true,
+            }
+          )
+        end,
+      })
+
+      --Typescript
       lspconfig.ts_ls.setup({
         capabilities = capabilities,
         on_attach = function(_, bufnr)
