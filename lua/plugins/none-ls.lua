@@ -19,7 +19,8 @@ return {
           args = { "--path", "$FILENAME" },
         }),
 
-
+        null_ls.builtins.formatting.gofmt,
+        null_ls.builtins.formatting.goimports,
 
         --require("none-ls.formatting.biome"),
         --require("none-ls.diagnostics.biome"),
