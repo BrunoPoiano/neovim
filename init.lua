@@ -1,11 +1,6 @@
-local global = vim.g
 local o = vim.opt
 
 vim.scriptencoding = "utf-8"
-
--- Map <leader>
-global.mapleader = " "
-global.maplocalleader = " "
 
 -- Editor options
 o.number = true             -- Print the line number in front of each line
@@ -34,19 +29,18 @@ o.splitright = true         -- New vertical splits appear to the right of the cu
 
 require("config.lazy")
 
-
 local function setup_auto_pairs()
   local mappings = {
-    { '{',  '{}<Left>' },
-    { '(',  '()<Left>' },
-    { '[',  '[]<Left>' },
+    { "{",  "{}<Left>" },
+    { "(",  "()<Left>" },
+    { "[",  "[]<Left>" },
     { "'",  "''<Left>" },
     { '"',  '""<Left>' },
-    { '<>', '<></><Left><Left><Left>' },
+    { "<>", "<></><Left><Left><Left>" },
   }
 
   for _, map in ipairs(mappings) do
-    vim.api.nvim_set_keymap('i', map[1], map[2], { noremap = true, silent = true })
+    vim.api.nvim_set_keymap("i", map[1], map[2], { noremap = true, silent = true })
   end
 end
 
@@ -64,10 +58,27 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
 })
 
+local function set_tab_name()
+  local tabname
+  vim.opt_local.title = true
+  vim.opt.titlestring = tabname
+end
+
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = "*",
+  callback = set_tab_name,
+})
+
+-- Tab navigations
 vim.api.nvim_set_keymap("n", "gt", ":tabnext<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "gT", ":tabprevious<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C-w>", ":tabclose<CR>", { noremap = true, silent = true })
 
+-- Move lines up and down
 vim.api.nvim_set_keymap("n", "<S-k>", ":m .+1<CR>==", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<S-j>", ":m .-2<CR>==", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<C-x>", "dd", { noremap = true, silent = true })
+
+-- split screen
+vim.api.nvim_set_keymap("n", "<C-a>", ":vsplit<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-d>", ":split<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-z>", ":close<CR>", { noremap = true, silent = true })
