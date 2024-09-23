@@ -6,6 +6,9 @@ return {
     config = function()
       local builtin = require('telescope.builtin')
       vim.keymap.set('n', '<C-p>', builtin.find_files, {})
+
+      vim.api.nvim_set_keymap('n', '<C-CR>', ':tab split | Telescope find_files<CR>',
+        { noremap = true, silent = true })
       --vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
     end
   },
