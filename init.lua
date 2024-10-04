@@ -82,3 +82,19 @@ vim.api.nvim_set_keymap("n", "<S-j>", ":m .-2<CR>==", { noremap = true, silent =
 vim.api.nvim_set_keymap("n", "<C-a>", ":vsplit<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C-d>", ":split<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C-z>", ":close<CR>", { noremap = true, silent = true })
+
+-- Navigate between splits using Space + Arrow Keys
+vim.api.nvim_set_keymap('n', '<Space><Left>', '<C-w>h', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Space><Down>', '<C-w>j', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Space><Up>', '<C-w>k', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Space><Right>', '<C-w>l', { noremap = true, silent = true })
+
+
+-- Binds to delete/change/replace without yanking.dd
+vim.api.nvim_set_keymap('x', '<leader>p', '"_dP', {}) -- Replace without yanking
+
+vim.api.nvim_set_keymap('n', '<leader>d', '"_d', {})  -- Delete without yanking
+vim.api.nvim_set_keymap('n', '<leader>D', '"_D', {})  -- Delete until EOL without yanking
+
+vim.api.nvim_set_keymap('n', '<leader>c', '"_c', {})  --Change without yanking
+vim.api.nvim_set_keymap('n', '<leader>C', '"_C', {})  -- Change until EOL without yanking
