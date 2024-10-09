@@ -52,7 +52,7 @@ vim.o.clipboard = "unnamedplus"
 vim.api.nvim_set_keymap("n", "<C-u>", "u", { noremap = true, silent = true })
 
 vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = { "*.js", "*.ts", "*.py", "*.c", "*.cpp", "*.tsx", "*.jsx" },
+  pattern = { "*.js", "*.ts", "*.py", "*.c", "*.cpp", "*.tsx", "*.jsx", "*.php" },
   callback = function()
     vim.lsp.buf.format()
   end,
@@ -75,8 +75,11 @@ vim.api.nvim_set_keymap("n", "gT", ":tabprevious<CR>", { noremap = true, silent 
 vim.api.nvim_set_keymap("n", "<C-w>", ":tabclose<CR>", { noremap = true, silent = true })
 
 -- Move lines up and down
-vim.api.nvim_set_keymap("n", "<S-k>", ":m .+1<CR>==", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<S-j>", ":m .-2<CR>==", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-j>", ":m .+1<CR>==", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-k>", ":m .-2<CR>==", { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap("x", "<C-j>", ":move '>+1<CR>gv", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("x", "<C-k>", ":move '<-2<CR>gv", { noremap = true, silent = true })
 
 -- split screen
 vim.api.nvim_set_keymap("n", "<C-a>", ":vsplit<CR>", { noremap = true, silent = true })
@@ -84,17 +87,17 @@ vim.api.nvim_set_keymap("n", "<C-d>", ":split<CR>", { noremap = true, silent = t
 vim.api.nvim_set_keymap("n", "<C-z>", ":close<CR>", { noremap = true, silent = true })
 
 -- Navigate between splits using Space + Arrow Keys
-vim.api.nvim_set_keymap('n', '<Space><Left>', '<C-w>h', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Space><Down>', '<C-w>j', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Space><Up>', '<C-w>k', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Space><Right>', '<C-w>l', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader><Left>', '<C-w>h', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader><Down>', '<C-w>j', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader><Up>', '<C-w>k', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader><Right>', '<C-w>l', { noremap = true, silent = true })
 
+vim.api.nvim_set_keymap('n', '<leader>h', '<C-w>h', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>j', '<C-w>j', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>k', '<C-w>k', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>l', '<C-w>l', { noremap = true, silent = true })
 
 -- Binds to delete/change/replace without yanking.dd
-vim.api.nvim_set_keymap('x', '<leader>p', '"_dP', {}) -- Replace without yanking
-
-vim.api.nvim_set_keymap('n', '<leader>d', '"_d', {})  -- Delete without yanking
-vim.api.nvim_set_keymap('n', '<leader>D', '"_D', {})  -- Delete until EOL without yanking
-
-vim.api.nvim_set_keymap('n', '<leader>c', '"_c', {})  --Change without yanking
-vim.api.nvim_set_keymap('n', '<leader>C', '"_C', {})  -- Change until EOL without yanking
+vim.api.nvim_set_keymap('x', '<leader>p', '"_dP<CR>', {}) -- Replace without yanking
+vim.api.nvim_set_keymap('x', '<leader>d', '"_d<CR>', {})  -- Delete without yanking
+vim.api.nvim_set_keymap('n', '<leader>d', '"_d<CR>', {})  -- Delete without yanking
