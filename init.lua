@@ -25,7 +25,10 @@ o.showcmd = true            -- Show (partial) command in the last line of the sc
 o.showmatch = true          -- Briefly jump to the matching bracket
 o.inccommand = "split"      -- Show effects of substitute commands as you type
 o.splitbelow = true         -- New horizontal splits appear below the current window
-o.splitright = true         -- New vertical splits appear to the right of the current window
+o.splitright = true         -- New vertical splits appear to the right of the current windowe
+
+
+
 
 require("config.lazy")
 
@@ -47,6 +50,30 @@ end
 setup_auto_pairs()
 
 vim.o.clipboard = "unnamedplus"
+
+-- reload the current file
+vim.api.nvim_set_keymap('n', '<C-r>', ':e!<CR>', { noremap = true, silent = true })
+
+-- Comment a line with Ctrl-/
+vim.api.nvim_set_keymap('n', '<C-_>', ':lua CommentToggle()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<C-_>', ':lua CommentToggle()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<C-_>', '<Esc>:lua CommentToggle()<CR>a', { noremap = true, silent = true })
+
+-- Function to toggle comment
+function CommentToggle()
+  local line = vim.fn.getline('.')
+  if line:match("^%s*//") then
+    vim.cmd([[execute "normal ^xx"]])
+  else
+    vim.cmd([[execute "normal I//"]])
+  end
+end
+
+vim.api.nvim_set_keymap('v', '<C-_>', ':lua CommentToggleVisual()<CR>', { noremap = true, silent = true })
+
+function CommentToggleVisual()
+  vim.cmd([[ '<,'>s/^\(\s*\)\(\/\/\)\?/\1\=empty(\2)?"\/\/":""/ ]])
+end
 
 -- Map Ctrl-u to undo
 vim.api.nvim_set_keymap("n", "<C-u>", "u", { noremap = true, silent = true })
