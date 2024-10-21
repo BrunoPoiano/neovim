@@ -10,6 +10,22 @@ return {
       vim.api.nvim_set_keymap('n', '<C-CR>', ':tab split | Telescope find_files<CR>',
         { noremap = true, silent = true })
       --vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+
+      local actions = require('telescope.actions')
+      require('telescope').setup({
+        defaults = {
+          mappings = {
+            i = {                                    -- Insert mode mappings
+              ["<C-d>"] = actions.select_horizontal, -- Open in horizontal split
+              ["<C-a>"] = actions.select_vertical,   -- Open in vertical split
+            },
+            n = {                                    -- Normal mode mappings
+              ["<C-d>"] = actions.select_horizontal,
+              ["<C-a>"] = actions.select_vertical,
+            },
+          },
+        },
+      })
     end
   },
   {
