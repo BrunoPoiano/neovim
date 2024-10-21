@@ -4,7 +4,7 @@ vim.scriptencoding = "utf-8"
 
 -- Editor options
 o.number = true             -- Print the line number in front of each line
-o.relativenumber = false    -- Show the line number relative to the line with the cursor in front of each line.
+o.relativenumber = true     -- Show the line number relative to the line with the cursor in front of each line.
 o.clipboard = "unnamedplus" -- Uses the clipboard register for all operations except yank.
 o.syntax = "on"             -- Syntax highlighting
 o.autoindent = true         -- Copy indent from current line when starting a new line.
@@ -26,9 +26,6 @@ o.showmatch = true          -- Briefly jump to the matching bracket
 o.inccommand = "split"      -- Show effects of substitute commands as you type
 o.splitbelow = true         -- New horizontal splits appear below the current window
 o.splitright = true         -- New vertical splits appear to the right of the current windowe
-
-
-
 
 require("config.lazy")
 
@@ -95,6 +92,10 @@ vim.api.nvim_create_autocmd("BufEnter", {
   pattern = "*",
   callback = set_tab_name,
 })
+
+--Change scroll page
+vim.api.nvim_set_keymap('n', '<PageUp>', '<C-u>zz', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<PageDown>', '<C-d>zz', { noremap = true, silent = true })
 
 -- Tab navigations
 vim.api.nvim_set_keymap("n", "gt", ":tabnext<CR>", { noremap = true, silent = true })
