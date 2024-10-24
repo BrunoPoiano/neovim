@@ -10,6 +10,16 @@ return {
     lazy = false,
     opts = {
       auto_install = true,
+      servers = {
+        tsserver = {
+          on_attach = function(client)
+            -- this is important, otherwise tsserver will format ts/js
+            -- files which we *really* don't want.
+            client.server_capabilities.documentFormattingProvider = false
+          end,
+        },
+        biome = {},
+      },
     },
   },
   {
@@ -21,7 +31,7 @@ return {
       lspconfig.lua_ls.setup({ capabilities = capabilities, })
       lspconfig.biome.setup({ capabilities = capabilities, })
       lspconfig.jsonls.setup({ capabilities = capabilities, })
-      lspconfig.eslint.setup({ capabilities = capabilities, })
+      -- lspconfig.eslint.setup({ capabilities = capabilities, })
       lspconfig.html.setup({ capabilities = capabilities, })
       lspconfig.lwc_ls.setup({ capabilities = capabilities, })
       lspconfig.ast_grep.setup({ capabilities = capabilities, })
@@ -31,8 +41,8 @@ return {
       lspconfig.tailwindcss.setup({ capabilities = capabilities })
       lspconfig.unocss.setup({ capabilities = capabilities })
       lspconfig.intelephense.setup({ capabilities = capabilities })
-      lspconfig.psalm.setup({ capabilities = capabilities })
-      lspconfig.emmet_language_server.setup({ capabilities = capabilities })
+      -- lspconfig.psalm.setup({ capabilities = capabilities })
+      -- lspconfig.emmet_language_server.setup({ capabilities = capabilities })
       lspconfig.rnix.setup({ capabilities = capabilities })
       lspconfig.volar.setup({ capabilities = capabilities })
 

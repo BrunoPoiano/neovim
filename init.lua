@@ -93,6 +93,52 @@ vim.api.nvim_create_autocmd("BufEnter", {
   callback = set_tab_name,
 })
 
+local function search_in_files(search_term)
+  -- Check if search_term is provided
+  if not search_term or search_term == "" then
+    print("No search term provided.")
+    return
+  end
+
+  -- Construct the ripgrep command to exclude specific directories
+  local command = string.format("rg --vimgrep --glob '!node_modules/*' --glob '!.*' --glob '!.next/*' -e '%s' .",
+    search_term)
+
+  -- Capture the output of the command
+  local handle = io.popen(command)
+  local result = handle:read("*a")
+  handle:close()
+
+  -- Check if result is not empty
+  if result ~= "" then
+    -- Split the output into lines and format for quickfix
+    local items = {}
+    for line in result:gmatch("[^\r\n]+") do
+      local filename = line:match("([^:]+)")
+      local lnum = tonumber(line:match(":(%d+):"))
+      if filename and lnum then
+        table.insert(items, { filename = filename, lnum = lnum, text = line })
+      end
+    end
+
+    -- Populate the quickfix list
+    vim.fn.setqflist({}, 'r', { title = 'Search Results', items = items })
+    vim.cmd("copen") -- Open the quickfix window
+  else
+    print("No matches found.")
+  end
+end
+
+-- Create a command to search
+vim.api.nvim_create_user_command('Search', function(opts)
+  search_in_files(opts.args)
+end, { nargs = 1 })
+
+
+vim.api.nvim_create_user_command('Search', function(opts)
+  search_in_files(opts.args)
+end, { nargs = 1 })
+
 --Change scroll page
 vim.api.nvim_set_keymap('n', '<PageUp>', '<C-u>zz', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<PageDown>', '<C-d>zz', { noremap = true, silent = true })
