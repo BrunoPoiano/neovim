@@ -42,9 +42,11 @@ return {
       lspconfig.unocss.setup({ capabilities = capabilities })
       lspconfig.intelephense.setup({ capabilities = capabilities })
       -- lspconfig.psalm.setup({ capabilities = capabilities })
-      -- lspconfig.emmet_language_server.setup({ capabilities = capabilities })
+      lspconfig.emmet_language_server.setup({ capabilities = capabilities })
       lspconfig.rnix.setup({ capabilities = capabilities })
       lspconfig.volar.setup({ capabilities = capabilities })
+
+      lspconfig.nushell.setup({ capabilities = capabilities })
 
       -- golang
       lspconfig.gopls.setup({

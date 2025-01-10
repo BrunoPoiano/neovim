@@ -52,11 +52,11 @@ vim.o.clipboard = "unnamedplus"
 vim.api.nvim_set_keymap('n', '<C-r>', ':e!<CR>', { noremap = true, silent = true })
 
 -- Comment a line with Ctrl-/
-vim.api.nvim_set_keymap('n', '<C-_>', ':lua CommentToggle()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', '<C-_>', ':lua CommentToggle()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '<C-_>', '<Esc>:lua CommentToggle()<CR>a', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-\\>', ':lua CommentToggle()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<C-\\>', ':lua CommentToggle()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<C-\\>', '<Esc>:lua CommentToggle()<CR>a', { noremap = true, silent = true })
 
--- Function to toggle comment
+-- Function to toggle comment.
 function CommentToggle()
   local line = vim.fn.getline('.')
   if line:match("^%s*//") then
